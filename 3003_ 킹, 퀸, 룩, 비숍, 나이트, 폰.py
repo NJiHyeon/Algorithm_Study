@@ -6,4 +6,4 @@ print(1-int(A), 1-int(B), 2-int(C), 2-int(D), 2-int(E), 8-int(F))
 cp = [1, 1, 2, 2, 2, 8]
 li = list(map(int, input().split()))
 for i in range(6):
-    print(cp[i]-li[i], end=' ')
+    print(cp[i]-li[i],end=' ')
