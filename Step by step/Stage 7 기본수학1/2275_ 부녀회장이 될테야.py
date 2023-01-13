@@ -1,3 +1,7 @@
+"""
+층별로 누적합 구하기
+"""
+
 # 층과 거주자 수의 규칙을 찾는 문제
 t = int(input())
 
@@ -11,7 +15,8 @@ for i in range(t) :
     for x in range(k) :
         new = []
         for y in range(n) :
-            new.append(sum(people[:y+1]))
+            ii = sum(people[:y+1])
+            new.append(ii)
         people = new.copy()
         
     print(people[-1])
