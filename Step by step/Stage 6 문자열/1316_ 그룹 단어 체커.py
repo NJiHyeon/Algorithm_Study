@@ -25,4 +25,3 @@ for i in range(n) :
         group_number += 1
         
 print(group_number)
-    
