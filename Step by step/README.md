@@ -1,20 +1,24 @@
-### 🔎 Fuction 
+### [단계별로 풀어보기 문제](https://www.acmicpc.net/step)
+
+----------------------------------
+### 각 Stage마다 README 파일 구성
+#### 🔎 Fuction 
 - 까먹기 쉽거나 자주 보면 좋은 함수
 - 처음보는 함수 
 - 주기적으로 들어와서 외우자 😂
 
 
-### 💡 Idea
+#### 💡 Idea
 - 문제 풀때 뭐를 생각해야 하는지 
 - 나만의 유형 정리라고 보면 좋을 듯
 - 문제 풀때 감이 안왔던 것 
 
-### ✨Caution
+#### ✨Caution
 - 아는 내용이지만 틀렸던 부분이나 헷갈리기 쉬운 것 정리
 
 
 
-### 📌 Question to be solved again
+#### 📌 Question to be solved again
 - 틀렸던 문제
 - 다시 보면 좋을 문제
 - 중요하다고 생각한 문제 등
