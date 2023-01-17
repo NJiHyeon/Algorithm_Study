@@ -17,6 +17,7 @@
 ----------------------------------
 ### 💡 Idea
 #### 1️. 주기 이용 
+- 어떤 문제 : 반복을 하긴 하는데 숫자가 점점 커지거나 점점 작아지고 주기에 맞는 숫자를 구해야 할 때(몇바퀴 ?, 몇바퀴 돌때 위치 어디 ?, 돌면서 X, Y값 구하기 ? 등등)
 - 대부분 알고리즘
     - 1) 초기 값 : 만들어진 값(number, c_n 등), 주기 돌 변수(circle, n 등) 만들어서 숫자 지정
     - 2) While 문으로 입력값이 만들어진 값보다 크면 계속 반복 이런식으로
@@ -26,7 +27,7 @@
 - 주의할 점
     - 더하기 뿐만 아니라 빼기, 곱하고 더하기, 곱하고 빼기 등으로 만들 수도 있다. 
     - 그 전값 + alpha라는 모양을 기억 !
-- [2292번](https://www.acmicpc.net/problem/2292), [1193번](https://www.acmicpc.net/problem/1193)
+- [2292번](https://www.acmicpc.net/problem/2292), [1193번](https://www.acmicpc.net/problem/1193), [2839번](https://www.acmicpc.net/problem/2839)
 
 #### 2️. 층별로 누적합 구해서 마지막 층의 숫자 구하기
 - 누적합을 구할 때 
@@ -59,3 +60,4 @@
 ### 📌 Question to be solved again
 [2275번](https://www.acmicpc.net/problem/2775)
 [1193번](https://www.acmicpc.net/problem/1193)
+[2839번](https://www.acmicpc.net/problem/2839)
