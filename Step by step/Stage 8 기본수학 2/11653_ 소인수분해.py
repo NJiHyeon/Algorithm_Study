@@ -44,4 +44,3 @@ for x in range(2, N+1) :
         while N % x == 0 :
             print(x)
             N = N / x
-            
