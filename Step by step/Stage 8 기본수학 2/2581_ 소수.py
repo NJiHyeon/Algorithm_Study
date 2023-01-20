@@ -3,8 +3,36 @@
 조금 더 간결한 것 같지만 저렇게 바로 떠오를 수 있을까 하는 생각이 든다 ㅠㅠ
 좀 더 쉽게 생각하려고 노력해보자 !!
 """
+"""
+2023/01/20
+이전 내용들이랑 개념을 다시 복습하고 풀어보니
+더 간단하게 풀렸당 !!~
+"""
 #----------------------------------------------------------------------------------------------------
-# My Code
+# My code (다시!)
+M = int(input())
+N = int(input())
+sosu_sum = 0 
+sosu_min = []
+ # 소수가 없으면 -1 출력
+for i in range(M, N+1) :
+    for x in range(2, i+1) :
+        if i % x == 0 :
+            if i == x :
+                sosu_sum += i
+                sosu_min.append(i)
+            break
+
+if sosu_sum == 0 :
+    print("-1")
+else :
+    print(sosu_sum)
+    # 숫자가 작은 순서로 들어가므로 젤 앞에 있는 것이 최솟값
+    print(sosu_min[0])
+    # 또는 print(min(sosu_min))
+
+#----------------------------------------------------------------------------------------------------
+# My Code(이전 코드)
 numbers = []
 sosu = []
 sosu_sum = 0
@@ -34,7 +62,7 @@ else :
     print(sosu_min)   
 
 #----------------------------------------------------------------------------------------------------
-# Googling Code
+# Googling Code 
 M = int(input())
 N = int(input())
 
@@ -56,6 +84,3 @@ if len(sosu_list) > 0:
 else:
     print(-1)
     
-    
-for i in range(2, 4) :
-    print(i)

@@ -11,8 +11,9 @@
 - `sosu += 1`로 개수 더해주기
 
 
-#### 2. 소수 출력 [2581번](https://www.acmicpc.net/problem/2581)
-
+#### 2. 소수 출력 [2581번](https://www.acmicpc.net/problem/2581)ㄴ
+- 주어진 숫자 사이에서 소수인 숫자들의 합 출력(sosu_sum = 0 만들어놓기)
+- 그중에서 최소값(소수) 출력(sosu_list = [] 만들어놓기)
 
 
 #### 3. 소인수 [11653번](https://www.acmicpc.net/problem/11653)
