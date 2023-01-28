@@ -7,7 +7,11 @@
 - `list(map(int, input().split()))` 
     - 숫자 입력값을 받아야 하는데 for문으로 받지 않을 때
     - 한꺼번에 받고 공백으로 분리 후, 리스트에 저장
-- str 있는 거  
+- `list(map(int, str(input())))` 
+    - 문자의 각 자리값을 리스트로 받고 싶을 때
+- `list(input())` , `list(sys.stdin.readline())`
+    - 숫자의 각 자리수를 리스트로 받고 싶을 때
+
 
 #### **`sys`**
 - `list_name.append(int(sys.stdin.readline()))`
