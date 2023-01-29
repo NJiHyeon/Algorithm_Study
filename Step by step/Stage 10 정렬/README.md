@@ -55,6 +55,12 @@
 ### 💡 Problem type
 - 정렬 종류
     - 버블 정렬 : 현재 값과 다음 인덱스의 값을 비교해서, 다음 인덱스 값이 현재 값보다 작으면 두 값을 서로 교환
+        """
+        `for i in range(N) :
+            for j in range(N - i - 1) :
+                if len(word_list[j]) > len(word_list[j+1]) :
+                    word_list[j], word_list[j+1] = word_list[j+1], word_list[j]`
+        """
     - 삽입 정렬 : 이전 인덱스의 값과 현재 인덱스의 값을 비교해 작은 값을 앞으로 옮긴다. 
     - 카운팅 정렬
     - 병합 정렬, 힘 정렬 ...
@@ -78,9 +84,13 @@
 ----------------------------------
 ### ✨Caution
 - 정렬 문제를 풀 때 거의 대부분 `list_name.sort()`를 사용하는데, 이것은 리스트에서만 사용할 수 있으므로 먼저 빈 리스트를 선언해두면 유용하다.  
-
+- 범위가 크므로 sys로 대부분 입력 받는걸 생각
+- 입력을 받을 때 변수를 여러개 만들어서 넣고 넣고 하면 에러 발생 확률 높아지므로 한번에 만들도록
+- 빈 리스트도 필요없더라도 꼭 만들어놓기 (까먹는것보다 나음)
 
 
 ----------------------------------
 ### 📌 Question to be solved again
-[10989번](https://www.acmicpc.net/problem/10989)
+- [10989번](https://www.acmicpc.net/problem/10989)
+- [2108번-최빈값](https://www.acmicpc.net/problem/2108)
+- [1191번](https://www.acmicpc.net/problem/1181)
