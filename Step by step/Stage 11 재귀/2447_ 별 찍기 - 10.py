@@ -49,11 +49,12 @@ def cycle_star(s) :
     for i in star :
         L.append(i*3)
     for i in star :
-        L.append(i + ' '*s//3 + i)
+        L.append(i + ' '* (s//3) + i)
     for i in star :
         L.append(i*3)
     
     return L
 
 s = int(sys.stdin.readline().strip())
-print('\n', cycle_star(s))
+print('\n'.join(cycle_star(s)))
+
