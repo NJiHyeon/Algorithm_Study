@@ -2,6 +2,7 @@
 # 차이점 : 나는 세 숫자의 합과, M과 합의 차이를 모두 리스트에 넣어서 비교했는데, 그렇게 하지 않고 변수를 하나 만들어서 합이 더 큰 숫자로 갱신하는 방법을 생각하도록 고치자 !
 # (즉, append -> a = max(a, sum))
 #----------------------------------------------------------------------
+# 맨 처음 시도한 틀린 풀이
 from itertools import combinations
 import sys
 N, M = map(int, sys.stdin.readline().split())
@@ -27,6 +28,19 @@ else :
     min_index = minus_list.index(min(minus_list))
     print(sum_list[min_index])
 
+#----------------------------------------------------------------------
+# 다시 풀었을 때 맞은 풀이
+N, M = map(int, input().split())
+card = list(map(int, input().split()))
+num_max = 0
+for i in range(N) : 
+    for j in range(i+1, N) :
+        for k in range(j+1, N) :
+            if card[i]+card[j]+card[k] <= M :
+                if num_max < card[i]+card[j]+card[k] : 
+                    num_max = card[i]+card[j]+card[k]
+                
+num_max
 #----------------------------------------------------------------------
 # 다른 사람 풀이 1 
 # for문을 이용해서 숫자 3개의 조합을 받고, 만약 숫자의 합이 M보다 크면 다시, 그렇지 않으면 그 전에 저장된 result(최댓값)과 합을 비교해 최댓값 갱신
