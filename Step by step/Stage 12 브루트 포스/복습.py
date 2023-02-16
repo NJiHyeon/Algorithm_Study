@@ -10,3 +10,17 @@ for i in range(N) :
                     num_max = card[i]+card[j]+card[k]
                 
 num_max
+
+# 영화감독 숌
+n = int(input())
+t = 0
+t_666 = 666
+while True :
+    if '666' in str(t_666) :
+        t += 1
+    if t == n :
+        print(t_666)
+        break
+    t_666 += 1
+    
+    
