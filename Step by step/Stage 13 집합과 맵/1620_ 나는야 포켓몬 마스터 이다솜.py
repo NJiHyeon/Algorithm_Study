@@ -21,12 +21,12 @@ import sys
 N, M = map(int, sys.stdin.readline().split())
 p_dict = {}
 for i in range(N) :
-    name = input().rstrip()
+    name = sys.stdin.readline().strip()
     p_dict[i] = name
     p_dict[name] = i
     
 for i in range(M) :
-    q = input().rstrip()
+    q = sys.stdin.readline().strip()
     if q.isdigit() :
         print(p_dict[int(q)-1])
     else : 
