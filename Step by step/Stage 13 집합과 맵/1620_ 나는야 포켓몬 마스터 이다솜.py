@@ -31,3 +31,4 @@ for i in range(M) :
         print(p_dict[int(q)-1])
     else : 
         print(p_dict[q]+1)
+p_dict

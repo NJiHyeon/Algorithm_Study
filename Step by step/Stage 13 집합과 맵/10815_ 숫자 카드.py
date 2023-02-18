@@ -1,4 +1,5 @@
 # 카드의 집합을 만들어 특정 카드가 집합에 있는지 빠르게 찾는 문제
+# 시간초과 발생
 import sys
 N = int(sys.stdin.readline())
 n_list = list(map(int, sys.stdin.readline().split()))
