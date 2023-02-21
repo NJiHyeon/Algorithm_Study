@@ -43,6 +43,6 @@
 
 ----------------------------------
 ### 📌 Question to be solved again
-- [10815번], [10816번](https://www.acmicpc.net/problem/10816)
+- [10815번](https://www.acmicpc.net/problem/10815), [10816번](https://www.acmicpc.net/problem/10816)
 - [1620번](https://www.acmicpc.net/problem/1620)
 - [14425번](https://www.acmicpc.net/problem/14425)
