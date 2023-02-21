@@ -18,6 +18,8 @@
 #### **`sys`**
 - `list_name.append(int(sys.stdin.readline()))`
     - 범위가 커지면 시간초과가 발생할 수 있으므로 input() 대신 사용하면 유용
+    - `sys.stdin.readline().split()` : 개수(숫자)를 받을 때
+    - `sys.stdin.readline().strip()` : for문을 이용하여 입력을 받을 때 공백 삭제
 
 #### **`sort`**
 - `list_name.sort()` 
