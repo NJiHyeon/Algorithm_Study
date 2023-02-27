@@ -2,7 +2,7 @@
 - for, while 등의 반복문을 사용
 
 ### 🔎 Fuction
-- `while True`
+- ✨ `while True`
     - while문의 조건문이 True이므로 항상 참이 된다. 따라서 while문 안에 있는 문장들은 무한하게 수행
     - 빠져나가려면 `ctrl+c`를 누르거나 while 밑에 조건문을 달아 `break`를 넣어주어야 한다.
         - 조건문 예시1 : 
