@@ -8,3 +8,10 @@ def solution(x):
     else :
         answer = False
     return answer
+
+# 좋은코드
+'''
+def solution(n) :
+    return n%sum(int(x) for x in str(n)) == 0
+print(solution(18))
+'''
