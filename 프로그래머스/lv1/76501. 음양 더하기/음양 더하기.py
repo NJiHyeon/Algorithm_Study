@@ -3,3 +3,8 @@ def solution(absolutes, signs):
         if signs[i] == False :
             absolutes[i] = -absolutes[i]
     return sum(absolutes)
+
+'''
+# 좋은코드
+
+'''
