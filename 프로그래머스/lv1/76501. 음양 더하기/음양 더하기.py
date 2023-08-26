@@ -6,5 +6,6 @@ def solution(absolutes, signs):
 
 '''
 # 좋은코드
-
+def solution(absolutes, signs):
+    return sum(absolutes if sign else -absolutes for absolutes, sign in zip(absolutes, signs))
 '''
