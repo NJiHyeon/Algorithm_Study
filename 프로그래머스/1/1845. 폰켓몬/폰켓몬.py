@@ -8,7 +8,6 @@ def solution(nums):
             answer += 1
             i += 1
             pon.pop(-1)
-            
         elif i<n  :
             answer += 0
             i += 1
@@ -16,3 +15,9 @@ def solution(nums):
             break
     
     return answer
+
+'''
+def solution(ls):
+    return min(len(ls)/2, len(set(ls)))
+
+'''
