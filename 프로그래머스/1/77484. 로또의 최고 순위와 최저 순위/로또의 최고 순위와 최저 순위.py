@@ -21,3 +21,16 @@ def solution(lottos, win_nums):
             answer.append(6)
     
     return answer
+
+'''
+# good idea
+def solution(lottos, win_nums):
+    rank = [6, 6, 5, 4, 3, 2, 1]
+    result = 0
+    d = lottos.count(0)
+    
+    for l in lottos :
+        if l in win_nums :
+            result += 1
+    return rank[result+d], rank[result]
+'''
