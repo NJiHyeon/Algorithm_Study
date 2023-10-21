@@ -1,6 +1,4 @@
 def solution(X, Y):
-    #x = list(map(int, X.split('')))
-    #y = list(map(int, Y.split('')))
     x = [X[i] for i in range(len(X))]
     y = [Y[i] for i in range(len(Y))]
     sx = list(set(x))
@@ -13,20 +11,8 @@ def solution(X, Y):
             if i==j  :
                 new.append(i*min(x.count(i), y.count(j)))
                 
-                
     if len(new) > 0 :
-        new.sort(reverse=True)
-        '''
-        r = list(set(new))
-        rr = [r[0][i] for i in range(len(r[0]))]
-        if list(set(new)) == ['0'] :
-            answer = '0'
-        elif list(set(rr)) == ['0'] :
-            answer = '0'
-        else :
-            for i in range(len(new)) :
-                answer += new[i]
-        '''       
+        new.sort(reverse=True)    
         if new[0][0] != '0' :
             for i in range(len(new)) :
                 answer += new[i]
