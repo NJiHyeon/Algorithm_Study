@@ -17,8 +17,6 @@ def solution(keymap, targets):
         else :
             result.append(sum(l))
             
-
-       
     real = []
     for r in result :
         if r==0 :
