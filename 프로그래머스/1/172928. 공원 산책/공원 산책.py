@@ -9,7 +9,7 @@ def solution(park, routes):
     h = len(park)-1 #2
     w = len(park[0])-1 #2
     
-    # start index [0,0]
+    # set start index
     start = []
     for i in range(len(park)) :
         if "S" in park[i] :
@@ -20,12 +20,15 @@ def solution(park, routes):
     # run routes : 공원을 벗어나는지 & 장애물 있는지 확인 잘하기
     for r in routes :
         if r[0] == "N" :
+            # 장애물 확인하기 위해 가야할 step 만큼 O,X 문자열 만들기
             p = ''
             for s in range(1, int(r[2:])+1) :
                 if start[0]-s >= 0 :
                     p += park[start[0]-s][start[1]]
+                # 움직였을때 벗어나면 그만 만들기
                 else :
                     break
+            # 장애물 확인 및 공원을 벗어나는지 확인
             if (start[0]-int(r[2:]) >= 0) and ("X" not in p) :
                 start[0] -= int(r[2:])
                 
