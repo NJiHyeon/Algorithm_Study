@@ -1,6 +1,6 @@
 # [level 1] 2016년 - 12901 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/12901) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/12901?language=python3) 
 
 ### 성능 요약
 
@@ -13,10 +13,6 @@
 ### 채점결과
 
 정확성: 100.0<br/>합계: 100.0 / 100.0
-
-### 제출 일자
-
-2023년 10월 1일 20:18:37
 
 ### 문제 설명
 
@@ -47,4 +43,4 @@
 </tbody>
       </table>
 
-> 출처: 프로그래머스 코딩 테스트 연습, https://school.programmers.co.kr/learn/challenges
+> 출처: 프로그래머스 코딩 테스트 연습, https://programmers.co.kr/learn/challenges
