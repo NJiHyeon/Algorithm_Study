@@ -2,12 +2,7 @@ import math
 def solution(brown, yellow):
     answer = []
     n = brown+yellow
-    #x*y = n
-    #x+y=(n+4-yellow)//2
-    #x*((n+4-yellow)//2 - x) = n
-    
-    #equation = x ** 2 - ((n+4-yellow)//2) * x + n
-    
+
     a=1
     b=((n+4-yellow)//2)
     c=n
@@ -22,5 +17,3 @@ def solution(brown, yellow):
         answer.append(x1)
         answer.append(x1)
     return answer
-
-    
