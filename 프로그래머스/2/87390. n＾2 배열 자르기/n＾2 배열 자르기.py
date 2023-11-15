@@ -1,12 +1,10 @@
 def solution(n, left, right) :
     answer = []
-    for index in range(left+1, right+2) :
+    for index in range(left, right+1) :
         i = index//n + 1
-        j = index%n
-        if j == 0 :
-            i -= 1
-            j = n
-        if n*n <index :
+        j = index%n +1
+
+        if n*n <=index :
             break
         if i>=j :
             answer.append(i)
