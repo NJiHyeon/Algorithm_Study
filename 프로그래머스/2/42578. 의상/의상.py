@@ -1,15 +1,14 @@
 def solution(clothes):
-    from itertools import combinations
-    import math
-    import collections
-    cl=[]
-    for c in clothes :
-        cl.append(c[1])
-    
-    c_n = list(collections.Counter(cl).values())
-    
+    dic = {}
+    for cl in clothes :
+        if cl[1] not in dic :
+            dic[cl[1]] = 1
+        else :
+            dic[cl[1]] += 1
+            
     answer = 1
-    for n in c_n :
-        answer *= (n+1)
+    catego = list(dic.keys())
+    for c in catego :
+        answer *= (dic[c]+1)
 
     return answer-1
