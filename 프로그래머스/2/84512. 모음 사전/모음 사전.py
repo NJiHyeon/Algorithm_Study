@@ -1,9 +1,14 @@
 def solution(word):
-    answer = 0
     from itertools import product
-    words = []
+    alphabet = ['A', 'E', 'I', 'O', 'U']
+    word_list = []
+    word_dict = {}
+    
     for i in range(1, 6) :
-        for c in product(['A', 'E', 'I', 'O', 'U'], repeat = i) :
-            words.append(''.join(c))
-    words.sort()        
-    return words.index(word)+1
+        word_list += list(product(alphabet, repeat=i))
+    word_list.sort()
+    
+    for i in range(len(word_list)) :
+        word_dict[''.join(word_list[i])] = i+1
+    return word_dict[word]
+        
