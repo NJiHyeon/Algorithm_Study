@@ -1,6 +1,5 @@
 def solution(skill, skill_trees):
     answer = 0
-    skilli = []
     for s in skill_trees :
         skill_index = []
         for k in s :
