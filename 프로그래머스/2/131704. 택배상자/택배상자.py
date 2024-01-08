@@ -1,16 +1,16 @@
 def solution(order) :
     answer = 0
-    cont = []
-    n = 1
+    n = 1 
+    container = []
     while n != len(order)+1 :
-        cont.append(n)
-        while cont[-1]==order[answer] :
+        container.append(n)
+        while order[answer] == container[-1] :
             answer += 1
-            cont.pop()
-            if len(cont) == 0 :
+            container.pop()
+            if len(container)==0 :
                 break
         n += 1
+        
     return answer
-    
 
         
