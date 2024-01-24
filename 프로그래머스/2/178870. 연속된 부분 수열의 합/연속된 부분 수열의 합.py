@@ -1,20 +1,20 @@
-def solution(sequence, k):
-    answer = []
-    sum = 0
-    l = 0
+def solution(sequence, k) :
+    result = []
     r = 0
+    l = 0
+    s = 0
     while True :
-        if sum < k :
+        if s <= k :
             if r >= len(sequence) :
                 break
-            sum += sequence[r]
+            s += sequence[r]
             r += 1
         else :
             if l >= len(sequence) :
                 break
-            sum -= sequence[l]
+            s -= sequence[l]
             l += 1
-        if sum == k :
-            answer.append([l,r-1])
-    answer.sort(key=lambda x:(x[1]-x[0], x[0]))
-    return answer[0]
+        if s==k :
+            result.append([l, r-1])
+    result.sort(key = lambda x : (x[1]-x[0], x[0]))
+    return result[0]
