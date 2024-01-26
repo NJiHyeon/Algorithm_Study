@@ -1,5 +1,4 @@
 def solution(book_time):
-    from collections import deque
     answer = 1
     book_time.sort()
     t = book_time.pop(0)
