@@ -1,10 +1,10 @@
 def solution(n):
-    result = []
+    result = ''
     while n :
-        t = n%3
-        if not t :
-            t = 4
+        if n%3 != 0 :
+            result += str(n%3)
+        else :
+            result += '4'
             n -= 1
-        result.append(str(t))
         n //= 3
-    return ''.join(result[::-1])
+    return result[::-1]
