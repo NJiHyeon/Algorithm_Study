@@ -1,10 +1,8 @@
 def solution(n):
-    step = [0]*(n+1)
-    step[0] = 1
-    step[1] = 1
-    if n>=2 :
-        for i in range(2, n+1) :
-            step[i] = step[i-1]+step[i-2]
-        return step[-1]%1234567
+    ini = [0, 1, 2]
+    if n==1 or n==2 :
+        return ini[n]
     else :
-        return step[-1]
+        for i in range(n-2) :
+            ini.append(ini[-1]+ini[-2])
+    return ini[-1]%1234567
