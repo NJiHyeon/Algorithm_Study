@@ -1,5 +1,4 @@
 def solution(m, musicinfos):
-    answer = '(None)'
     music = []
     m = m.replace('C#', 'c')
     m = m.replace('D#', 'd')
@@ -48,4 +47,3 @@ def mel(m, mu, l) :
         return True
     else :
         return False
-    
