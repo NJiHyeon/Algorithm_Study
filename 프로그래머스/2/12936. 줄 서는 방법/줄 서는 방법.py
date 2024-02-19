@@ -1,14 +1,5 @@
 def solution(n, k):
     import math
-    '''
-    from itertools import permutations
-    jul = []
-    j = 0
-    for i in permutations([i for i in range(1, n+1)], n):
-        j += 1
-        if j == k :
-            return i
-    '''
     origin = [i for i in range(1, n+1)]
     answer =[]
     d = n-1 # 4
@@ -28,4 +19,3 @@ def solution(n, k):
             break
     answer += origin[::-1]
     return answer
-    
