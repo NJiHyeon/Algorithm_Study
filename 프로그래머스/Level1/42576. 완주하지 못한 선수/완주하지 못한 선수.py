@@ -1,7 +1,12 @@
 def solution(participant, completion):
-    l = list(set(participant)-set(completion))
-    if len(l) == 0 :
-        answer = [x for x,y in zip(sorted(participant), sorted(completion)) if x != y]
+    participant.sort()
+    completion.sort()
+    n = []
+    for i in range(len(completion)) :
+        if participant[i]!=completion[i] :
+            n.append(participant[i])
+            
+    if len(n)==0 :
+        return participant[-1]
     else :
-        answer = l
-    return answer[0]
+        return n[0]

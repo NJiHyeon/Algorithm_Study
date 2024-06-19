@@ -1,20 +1,15 @@
 def solution(n, lost, reserve):
-    # 정렬
-    lost.sort()
-    reserve.sort()
-    
-    # 자기자신의 체육복을 도난당했을시,
-    lost, reserve = list(set(lost)-set(reserve)),list(set(reserve)-set(lost))
-    
-    for l in lost[:] :
-        for r in reserve[:] :
-            if l-r==-1 or l-r==1 :
-                lost.remove(l)
-                reserve.remove(r)
+    reserve, lost = list(set(reserve)-set(lost)), list(set(lost)-set(reserve)) #key point!
+    s = []
+    for l in lost :
+        s.append(l)
+        for r in reserve :
+            if abs(l-r)==1 :
+                s.pop()
+                del reserve[reserve.index(r)]
                 break
     
-    return n-len(lost)
-
+    return n-len(s)
 
 
 

@@ -1,4 +1,5 @@
 def solution(survey, choices):
+    ###
     cho = []
     i = 0
     for s in survey :

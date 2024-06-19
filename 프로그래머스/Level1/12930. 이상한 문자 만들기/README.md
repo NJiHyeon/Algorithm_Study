@@ -4,7 +4,7 @@
 
 ### 성능 요약
 
-메모리: 10.2 MB, 시간: 0.03 ms
+메모리: 10.1 MB, 시간: 0.02 ms
 
 ### 구분
 
@@ -13,6 +13,10 @@
 ### 채점결과
 
 정확성: 100.0<br/>합계: 100.0 / 100.0
+
+### 제출 일자
+
+2023년 11월 3일 17:29:58
 
 ### 문제 설명
 
@@ -47,4 +51,4 @@
 <p>힌트가 필요한가요? [코딩테스트 연습 힌트 모음집]으로 오세요! → <a href="https://school.programmers.co.kr/learn/courses/14743?itm_content=lesson12930" target="_blank" rel="noopener">클릭</a></p>
 
 
-> 출처: 프로그래머스 코딩 테스트 연습, https://programmers.co.kr/learn/challenges
+> 출처: 프로그래머스 코딩 테스트 연습, https://school.programmers.co.kr/learn/challenges

@@ -1,12 +1,11 @@
-# 틀렸음
 def solution(s):
     answer = ''
-    s_list = s.split(' ')
-    for i in s_list :
-        for j in range(len(i)) :
-            if j%2 == 0 :
-                answer += i[j].upper()
+    s_split = s.split(' ')
+    for s in s_split :
+        for i in range(len(s)) :
+            if i%2 == 0 :
+                answer += s[i].upper()
             else :
-                answer += i[j].lower()
+                answer += s[i].lower()
         answer += ' '
-    return answer[0:-1]
+    return answer[:-1]
