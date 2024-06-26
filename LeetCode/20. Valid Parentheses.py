@@ -1,3 +1,4 @@
+'''Try1'''
 class Solution:
     def isValid(self, s: str) -> bool:
         result = []
@@ -23,3 +24,18 @@ class Solution:
 solution = Solution()
 solution.isValid('(([])}')
 solution.isValid('(')
+
+#=============================================================================
+'''Teacher code'''
+def isValid(s):
+    stack = []
+    for p in s:
+        if p == "(":
+            stack.append(")")
+        elif p == "{":
+            stack.append("}")
+        elif p == "[":
+            stack.append("]")
+        elif not stack or stack.pop() != p:
+            return False
+    return not stack
