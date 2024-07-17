@@ -1,7 +1,7 @@
 #===========================================================================================================================
 # Loop algorithm
 class Solution:
-    def twoSum(self, nums: List[int], target: int) -> List[int]:
+    def twoSum(self, nums, target: int):
         for i in range(len(nums)):
             for j in range(i+1, len(nums)):
                 if nums[i] + nums[j] == target:
@@ -22,5 +22,27 @@ def twoSum(nums, target) :
             l += 1
     return False
 #===========================================================================================================================
+# 재귀
+
+#===========================================================================================================================
+# 딕셔너리
+
+#===========================================================================================================================
 twoSum(nums=[4, 1, 9, 7, 5, 3, 16], target=14)
 twoSum(nums=[2, 1, 5, 7], target=4)
+
+
+
+def subsets(self, nums):
+    def backtrack(start, path):
+        result.append(path[:])
+        
+        for i in range(start, len(nums)):
+                            
+            path.append(nums[i])
+            backtrack(i + 1, path)
+            path.pop()
+
+    result = []
+    backtrack(0, [])
+    return result
