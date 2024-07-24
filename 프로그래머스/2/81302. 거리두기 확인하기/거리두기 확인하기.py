@@ -26,14 +26,8 @@ def solution(places):
                         visited[next_r][next_c] = True
         return True
             
-        
-        
-        
-        
-    
     answer = []
     for place in places:
-        # place : ["POOOP", "OXXOX", "OPXPX", "OOXOX", "POXXP"]
         result = 0
         p = 0
         for i in range(5):
