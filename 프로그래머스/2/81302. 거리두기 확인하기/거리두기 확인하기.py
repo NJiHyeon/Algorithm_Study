@@ -9,7 +9,7 @@ def solution(places):
         dc = [1, 0, -1, 0]
         q = deque()
         q.append((r, c, 0))
-        visited = [[False]*5 for _ in range(5)]
+        visited = [[False]*5 for _ in range(5)] 
         visited[r][c] = True
         while q:
             cur_r, cur_c, cur_dist = q.popleft()
@@ -26,9 +26,8 @@ def solution(places):
                         q.append((next_r, next_c, next_dist))
                         visited[next_r][next_c] = True
         return True
-                
     
-    # one place code
+    # one_place code
     def one_place(place):
         for r in range(5):
             for c in range(5):
@@ -36,7 +35,6 @@ def solution(places):
                     if not bfs(r, c, place):
                         return False
         return True
-    
     
     # main code
     answer = []
@@ -46,4 +44,3 @@ def solution(places):
         else:
             answer.append(0)
     return answer
-    
