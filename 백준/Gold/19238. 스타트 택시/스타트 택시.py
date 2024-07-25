@@ -68,16 +68,16 @@ def go_dest(tr, tc):
 
 
 # 남아 있는 승객이 있다면 계속 실행
-while fuel > 0 and len(passenger) != 0:
-	#⭐ 1. BFS 알고리즘으로 현재 택시 위치로부터 승객까지의 최단거리 계산 -> pickup, 연료/승객 확인
+while len(passenger) != 0:
+		#⭐ 1. BFS 알고리즘으로 현재 택시 위치로부터 승객까지의 최단거리 계산 -> pickup, 연료/승객 확인
     cand, used_fuel = pickup(tr, tc)
-    if used_fuel > fuel or len(cand) == 0:
+    if used_fuel > fuel:
         answer = -1
         break
     fuel -= used_fuel
     #⭐ 2. 최단거리 기준으로 가장 높은 우선순위의 승객 위치로 택시 이동
     tr, tc = sorted(cand)[0]
-	#⭐ 3. 다시 BFS 알고리즘을 통해 승객을 도착지까지 이동시키고 연료 보충 -> go_dest
+		#⭐ 3. 다시 BFS 알고리즘을 통해 승객을 도착지까지 이동시키고 연료 보충 -> go_dest
     pdr, pdc, used_fuel = go_dest(tr, tc)
     if used_fuel > fuel:
         answer = -1

@@ -4,7 +4,7 @@
 
 ### 성능 요약
 
-메모리: 34200 KB, 시간: 168 ms
+메모리: 34220 KB, 시간: 152 ms
 
 ### 분류
 
@@ -12,7 +12,7 @@
 
 ### 제출 일자
 
-2024년 7월 18일 21:06:50
+2024년 7월 25일 09:56:32
 
 ### 문제 설명
 
@@ -39,7 +39,7 @@
 			<p><그림 2></p>
 			</td>
 			<td style="width: 50%; text-align: center;">
-			<p><img alt="" src="https://upload.acmicpc.net/fb1d41e5-a420-4957-8fe8-1a6f822b284e/-/preview/" style="width: 355px; height: 354px;"></p>
+			<p><img alt="" src="" style="width: 355px; height: 354px;"></p>
 
 			<p><그림 3></p>
 			</td>
@@ -53,12 +53,12 @@
 	<tbody>
 		<tr>
 			<td style="width: 50%; text-align: center;">
-			<p><img alt="" src="https://upload.acmicpc.net/a4ad059c-f909-4cf2-a401-9d72a69a2549/-/preview/" style="width: 355px; height: 356px;"></p>
+			<p><img alt="" src="" style="width: 355px; height: 356px;"></p>
 
 			<p><그림 4></p>
 			</td>
 			<td style="width: 50%; text-align: center;">
-			<p><img alt="" src="https://upload.acmicpc.net/3abc49bb-33a3-4828-a6c3-1be22fd3967d/-/preview/" style="width: 357px; height: 356px;"></p>
+			<p><img alt="" src="" style="width: 357px; height: 356px;"></p>
 
 			<p><그림 5></p>
 			</td>
@@ -72,12 +72,12 @@
 	<tbody>
 		<tr>
 			<td style="width: 50%; text-align: center;">
-			<p><img alt="" src="https://upload.acmicpc.net/86aa0566-f468-4343-a83d-d978f0120cec/-/preview/" style="width: 354px; height: 353px;"></p>
+			<p><img alt="" src="" style="width: 354px; height: 353px;"></p>
 
 			<p><그림 6></p>
 			</td>
 			<td style="width: 50%; text-align: center;">
-			<p><img alt="" src="https://upload.acmicpc.net/aebc9d40-2c56-4e6c-b914-d8d9b55f8ff5/-/preview/" style="width: 362px; height: 354px;"></p>
+			<p><img alt="" src="" style="width: 362px; height: 354px;"></p>
 
 			<p><그림 7></p>
 			</td>
