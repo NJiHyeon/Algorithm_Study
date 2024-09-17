@@ -14,7 +14,7 @@ def solution(k, dungeons):
     backtracking([])
     # 2. 탐험할 수 있는 최대 던전 개수
     for permut in permutations:
-        current = k-0
+        current = k
         result = 0
         for i in permut:
             if current >= dungeons[i][0]:
