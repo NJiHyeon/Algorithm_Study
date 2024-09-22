@@ -1,75 +1,72 @@
+from collections import deque 
 import sys
-from collections import deque
 from itertools import combinations
 
-# 입력값 받기
 input = sys.stdin.readline
 row_len, col_len = map(int, input().split())
-board = [list(map(int, input().split())) for _ in range(row_len)]
+grid = [list(map(int, input().split())) for _ in range(row_len)]
 
-# 필요한 것 정의
-wall_cand = []
-virus_cand = []
+dr = [0, 1, 0, -1]
+dc = [1, 0, -1, 0]
+wall = []
+wall_3 = []
+virus = []
+
 for r in range(row_len):
     for c in range(col_len):
-        if board[r][c] == 0:
-            wall_cand.append((r, c))
-        elif board[r][c] == 2:
-            virus_cand.append((r, c))
+        if grid[r][c] == 0:
+            wall.append((r, c))
+        elif grid[r][c] == 2:
+            virus.append((r, c))
 
-def in_Range(r, c):
-    return 0 <= r < row_len and 0 <= c < col_len 
+def combi(curr, curr_i):
+    # 탈출 조건
+    if len(curr) == 3:
+        wall_3.append(curr[:])
+        return
+    # 반복 수행
+    for i in range(curr_i, len(wall)):
+        curr.append(wall[i])
+        combi(curr, curr_i+1)
+        curr.pop()
 
-# bfs
-def bfs(board):
-    dr = [0, 1, 0, -1]
-    dc = [1, 0, -1, 0]
-    new_board = [board[i][:] for i in range(row_len)]
-    visited = [[False]*col_len for _ in range(row_len)]
-    # 퍼뜨리기
-    q = deque()
-    for virus_r, virus_c in virus_cand:
-        if not visited[virus_r][virus_c]:
-            q.append((virus_r, virus_c))
-            visited[virus_r][virus_c] = True 
-            while q:
-                cur_r, cur_c = q.popleft()
-                for i in range(4):
-                    next_r = cur_r + dr[i]
-                    next_c = cur_c + dc[i]
-                    if in_Range(next_r, next_c) and new_board[next_r][next_c] == 0:
-                        if not visited[next_r][next_c]:
-                            q.append((next_r, next_c))
-                            visited[next_r][next_c] = True 
-                            new_board[next_r][next_c] = 2
-    
-    
-    # 안전영역 개수 세기
-    safe_region = 0
+
+def bfs(grid, r, c):
+    q = deque(virus)
+    while q:
+        cur_r, cur_c = q.popleft()
+        for i in range(4):
+            next_r = cur_r + dr[i]
+            next_c = cur_c + dc[i]
+            if 0 <= next_r < row_len and 0 <= next_c < col_len:
+                    if grid[next_r][next_c] == 0:
+                        grid[next_r][next_c] = 2
+                        q.append((next_r, next_c))
+
+    l = 0
     for r in range(row_len):
         for c in range(col_len):
-            if new_board[r][c] == 0:
-                safe_region += 1
-    return safe_region
+            if grid[r][c] == 0:
+                l += 1
+    return l
 
+# 벽 세우기
+max_safe = 0
+for cur_wall in combinations(wall, 3):
+    grid[cur_wall[0][0]][cur_wall[0][1]] = 1
+    grid[cur_wall[1][0]][cur_wall[1][1]] = 1
+    grid[cur_wall[2][0]][cur_wall[2][1]] = 1
 
+    # 바이러스 퍼트리기
+    copy_grid = [grid[i][:] for i in range(row_len)]
+    bfs_result = bfs(copy_grid, r, c)
 
+    # 안전영역 개수 세기
+    max_safe = max(bfs_result, max_safe)
 
-# main
-result = 0
-for wall in combinations(wall_cand, 3):
-    # wall : [(r1, c1), (r2, c2), (r3, c3)]
-    # 벽 세우기
-    for wr, wc in wall:
-        board[wr][wc] = 1
+    # 되돌리기
+    grid[cur_wall[0][0]][cur_wall[0][1]] = 0
+    grid[cur_wall[1][0]][cur_wall[1][1]] = 0
+    grid[cur_wall[2][0]][cur_wall[2][1]] = 0
 
-    # bfs로 바이러스 퍼뜨리기
-    safe_region = bfs(board)
-    result = max(result, safe_region)
-
-    # 다시 벽 되돌리기
-    for wr, wc in wall:
-        board[wr][wc] = 0
-
-
-print(result)
+print(max_safe)
