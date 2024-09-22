@@ -1,71 +1,60 @@
 import sys
-from collections import deque 
-from itertools import combinations 
+from sys import stdin as s
+from collections import deque
+from itertools import combinations
 
-# 입력 받기
-input = sys.stdin.readline
-N, M = map(int, input().split())
+N, M = map(int, s.readline().split())
+grid = [list(map(int, s.readline().split())) for _ in range(N)]
+virus = []
+entire_empty = 0
 row_len = col_len = N
-board = [list(map(int, input().split())) for _ in range(row_len)]
-
-# 초기 설정
 dr = [0, 1, 0, -1]
 dc = [1, 0, -1, 0]
 
-# board 전처리
-virus = []
 for r in range(row_len):
     for c in range(col_len):
-        if board[r][c] == 0:
-            board[r][c] = '_'
-        elif board[r][c] == 1:
-            board[r][c] = '-'
+        if grid[r][c] == 0:
+            grid[r][c] = '+'
+            entire_empty += 1
+        elif grid[r][c] == 1:
+            grid[r][c] = '-'
         else:
-            board[r][c] = '*'
+            grid[r][c] = '*'
             virus.append((r, c))
 
-# bfs
-def in_Range(r, c):
-    return 0 <= r < row_len and 0 <= c < col_len
-
-def bfs(v):
-    # v : [[r, c], ..., [r, c]]
-    new_board = [board[i][:] for i in range(row_len)]
-    q = deque()
-    result = 0
-    for v_r, v_c in v:
-        q.append((v_r, v_c, 0))
-        new_board[v_r][v_c] = 0
-    
+def bfs(grid, virus_cand, empty):
+    tmp = [grid[i][:] for i in range(row_len)]
+    q = deque(virus_cand)
     while q:
-        cur_r, cur_c, cur_n = q.popleft() #1, 5, 0
+        if empty == 0:
+            return tmp[q[-1][0]][q[-1][1]]
+        cur_r, cur_c = q.popleft()
         for i in range(4):
             next_r = cur_r + dr[i]
             next_c = cur_c + dc[i]
-            next_n = cur_n + 1
-            if in_Range(next_r, next_c) :
-                if new_board[next_r][next_c] == '_':
-                    q.append((next_r, next_c, next_n))
-                    new_board[next_r][next_c] = next_n
-                    result = max(next_n, result)
-                elif new_board[next_r][next_c] == '*':
-                    q.append((next_r, next_c, next_n))
-                    new_board[next_r][next_c] = next_n
+            if 0 <= next_r < row_len and 0 <= next_c < col_len:
+                if tmp[next_r][next_c] == '+':
+                    empty -= 1
+                    tmp[next_r][next_c] = tmp[cur_r][cur_c]+1
+                    q.append((next_r, next_c))
+                elif tmp[next_r][next_c] == '*':
+                    tmp[next_r][next_c] = tmp[cur_r][cur_c]+1
+                    q.append((next_r, next_c))
+    return -1
+    
+result = 1000000
+for virus_cand in combinations(virus, M):
+    for vc in virus_cand:
+        grid[vc[0]][vc[1]] = 0
 
-    for r in range(row_len):
-        for c in range(col_len):
-            if new_board[r][c] == '_':
-                return -1 
-    return result
+    bfs_result = bfs(grid, virus_cand, entire_empty)
+    if bfs_result != -1 and bfs_result < result:
+        result = bfs_result
 
+    for vc in virus_cand:
+        grid[vc[0]][vc[1]] = '*'
 
-# main
-final_result = -1
-for v in combinations(virus, M):
-    result = bfs(v)
-    if result != -1 and final_result != -1:
-        final_result = min(result, final_result)
-    elif result != -1 and final_result == -1:
-        final_result = result
-
-print(final_result)
+if result == 1000000:
+    print(-1)
+else:
+    print(result)
