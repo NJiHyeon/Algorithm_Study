@@ -1,46 +1,39 @@
 def solution(places):
-    from collections import deque
-    def in_Range(r, c):
-        return 0 <= r < 5 and 0 <= c < 5
-    
-    # bfs code
-    def bfs(r, c, place):
-        dr = [0, 1, 0, -1]
-        dc = [1, 0, -1, 0]
-        q = deque()
-        q.append((r, c, 0))
-        visited = [[False]*5 for _ in range(5)] 
-        visited[r][c] = True
-        while q:
-            cur_r, cur_c, cur_dist = q.popleft()
-            for i in range(4):
-                next_r = cur_r + dr[i]
-                next_c = cur_c + dc[i]
-                next_dist = cur_dist + 1
-                if in_Range(next_r, next_c) and not visited[next_r][next_c] and place[next_r][next_c] != 'X':
-                    if next_dist > 2:
-                        continue
-                    elif place[next_r][next_c] == 'P':
+    dr = [0, 1, 0, -1]
+    dc = [1, 0, -1, 0]
+
+    def dfs(cur_r, cur_c, curr_n):
+        # 탈출 조건
+        if curr_n >= 2:
+            return
+        # 반복 수행
+        for i in range(4):
+            next_r = cur_r + dr[i]
+            next_c = cur_c + dc[i]
+            if 0 <= next_r < 5 and 0 <= next_c < 5:
+                if not visited[next_r][next_c]:
+                    if place[next_r][next_c] == 'P':
                         return False
-                    else:
-                        q.append((next_r, next_c, next_dist))
+                    elif place[next_r][next_c] == 'O':
                         visited[next_r][next_c] = True
+                        if dfs(next_r, next_c, curr_n+1) == False:
+                            return False
+                        visited[next_r][next_c] = False
         return True
-    
-    # one_place code
-    def one_place(place):
+
+
+    answer = []
+    for p in range(5):
+        place = places[p]
+        result = 1
+        visited = [[False]*5 for _ in range(5)]
         for r in range(5):
             for c in range(5):
-                if place[r][c] == 'P':
-                    if not bfs(r, c, place):
-                        return False
-        return True
-    
-    # main code
-    answer = []
-    for place in places:
-        if one_place(place):
-            answer.append(1)
-        else:
-            answer.append(0)
+                if place[r][c] == "P":
+                    visited[r][c] = True
+                    if not dfs(r, c, 0):
+                        result = 0
+                    visited[r][c] = False
+        answer.append(result)
+
     return answer
