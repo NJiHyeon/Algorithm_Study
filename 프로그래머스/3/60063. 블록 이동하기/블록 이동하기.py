@@ -1,64 +1,53 @@
+from collections import deque
+# 이동 가능한 경우의 수 확인 함수
+def get_next_pos(pos, new_board):
+    next_pos = set()
+    lx, ly, rx, ry = pos[0][0], pos[0][1], pos[1][0], pos[1][1]
+    #✅ 상하좌우 이동이 가능한 경우를 구한다.
+    for dx, dy in [[0, 1], [0, -1], [1, 0], [-1, 0]]:
+        nlx, nly, nrx, nry = lx+dx, ly+dy, rx+dx, ry+dy
+        if new_board[nlx][nly] == 0 and new_board[nrx][nry] == 0:
+            next_pos.add(((nlx, nly),(nrx, nry)))
+    #✅ 가로 방향일 경우 회전 가능한 경우를 구한다.
+    if lx == rx:
+        for i in [1, -1]:
+            if new_board[lx+i][ly] == 0 and new_board[rx+i][ry] == 0:
+                next_pos.add(((lx, ly), (lx+i, ly)))
+                next_pos.add(((rx, ry), (rx+i, ry)))
+		#✅ 세로 방향일 경우 회전 가능한 경우를 구한다.
+    if ly == ry:
+        for i in [1, -1]:
+            if new_board[lx][ly+i] == 0 and new_board[rx][ry+i] == 0:
+                next_pos.add(((lx, ly), (lx, ly+i)))
+                next_pos.add(((rx, ry), (rx, ry+i)))
+    return next_pos
+
 def solution(board):
-    from collections import deque 
-    
-    # 초기 설정
-    row_len, col_len = len(board), len(board[0])
-    def in_Range(r, c):
-        return 0 <= r < row_len and 0 <= c < col_len and board[r][c] == 0
-    
-    # main = bfs 
+    n = len(board)
+		#✅ 인덱싱의 편의를 위해 원본 배열에 상하좌우로 한 칸씩 늘린 새 배열을 만든다.
+    new_board = [[1 for _ in range(n+2)] for _ in range(n+2)]
+    #✅ 배열의 모서리 부분을 1로 채우고 내부를 원본 배열의 값들로 채운다.
+    for i in range(n):
+        for j in range(n):
+            new_board[i+1][j+1] = board[i][j]
+    #✅ 로봇의 첫 위치를 방문표시하고 큐에 추가한다.
+    robot_pos = ((1, 1), (1, 2))
     q = deque()
-    q.append([(0, 0), (0, 1), 0])
+    q.append((robot_pos, 0))
     visited = set()
-    visited.add(frozenset(((0, 0), (0, 1))))
+		# 로봇의 위치는 set 자료형이지만 set은 hash할수 없는 함수이기에 set에 추가 불가. 을 통해 hash가능하도록 변경
+    visited.add((robot_pos))
+    #✅ 큐가 빌때까지 반복한다.
     while q:
-        cur1, cur2, cur_n = q.popleft()
-        cur_r1, cur_c1 = cur1[0], cur1[1]
-        cur_r2, cur_c2 = cur2[0], cur2[1]
-        if (cur_r1, cur_c1) == (row_len-1, col_len-1) or (cur_r2, cur_c2) == (row_len-1, col_len-1):
-            return cur_n
-        
-        for dr, dc in [[0, 1], [1, 0], [0, -1], [-1, 0]]:  
-            next_r1 = cur_r1 + dr
-            next_c1 = cur_c1 + dc
-            next_r2 = cur_r2 + dr
-            next_c2 = cur_c2 + dc
-            next_n = cur_n + 1
-            if in_Range(next_r1, next_c1) and in_Range(next_r2, next_c2):
-                if frozenset(((next_r1, next_c1), (next_r2, next_c2))) not in visited:
-                    q.append([(next_r1, next_c1), (next_r2, next_c2), next_n])
-                    visited.add(frozenset(((next_r1, next_c1), (next_r2, next_c2))))
-        
-        # 가로 방향
-        if cur_r1 == cur_r2 :
-            for dr, dc in [[1, 0], [-1, 0]]:
-                next_r1 = cur_r1 + dr
-                next_c1 = cur_c1 + dc
-                next_r2 = cur_r2 + dr
-                next_c2 = cur_c2 + dc
-                next_n = cur_n + 1
-                if in_Range(next_r1, next_c1) and in_Range(next_r2, next_c2):
-                    if frozenset(((cur_r1, cur_c1), (next_r1, next_c1))) not in visited:
-                        q.append([(cur_r1, cur_c1), (next_r1, next_c1), next_n])
-                        visited.add(frozenset(((cur_r1, cur_c1), (next_r1, next_c1))))
-                    if frozenset(((cur_r2, cur_c2), (next_r2, next_c2))) not in visited:
-                        q.append([(cur_r2, cur_c2), (next_r2, next_c2), next_n])
-                        visited.add(frozenset(((cur_r2, cur_c2), (next_r2, next_c2))))
-        
-        # 세로 방향
-        if cur_c1 == cur_c2 :
-            for dr, dc in [[0, 1], [0, -1]]:
-                next_r1 = cur_r1 + dr
-                next_c1 = cur_c1 + dc
-                next_r2 = cur_r2 + dr
-                next_c2 = cur_c2 + dc
-                next_n = cur_n + 1
-                if in_Range(next_r1, next_c1) and in_Range(next_r2, next_c2):
-                    if frozenset(((cur_r1, cur_c1), (next_r1, next_c1))) not in visited:
-                        q.append([(cur_r1, cur_c1), (next_r1, next_c1), next_n])
-                        visited.add(frozenset(((cur_r1, cur_c1), (next_r1, next_c1))))
-                    if frozenset(((cur_r2, cur_c2), (next_r2, next_c2))) not in visited:
-                        q.append([(cur_r2, cur_c2), (next_r2, next_c2), next_n])
-                        visited.add(frozenset(((cur_r2, cur_c2), (next_r2, next_c2))))
-    
-    
+        cur_pos, cost = q.popleft()
+				#✅ 목적지에 도착한 경우 종료한다.
+	
+        if (n, n) in cur_pos:
+            return cost
+				#✅ 현재 상태에서 이동가능한 상태를 구한다.
+        for next_pos in get_next_pos(cur_pos, new_board):
+        		#✅ 아직 방문하지 않았다면 방문한다.
+            if (next_pos) not in visited:
+                q.append((next_pos, cost+1))
+                visited.add((next_pos))
+    return -1
