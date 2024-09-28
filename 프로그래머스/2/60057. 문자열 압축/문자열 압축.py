@@ -1,34 +1,23 @@
 def solution(s):
-    import sys
-    answer = sys.maxsize
+    min_s = 1001
     for l in range(1, len(s)+1):
-        result = ''
-        s_dict = {}
+        stack = []
+        l_s = ''
         for i in range(0, len(s), l):
-            if len(s_dict) == 0:
-                s_dict[s[i:i+l]] = 1
-            elif s[i:i+l] in s_dict:
-                s_dict[s[i:i+l]] += 1
-            else:
-                s_1 = list(s_dict.keys())[0]
-                s_2 = list(s_dict.values())[0]
-                if s_2 == 1:
-                    result += s_1
+            cur_s = s[i : i+l]
+            if (stack and stack[-1] != cur_s):
+                past_n = 0
+                while stack:
+                    past_s = stack.pop()
+                    past_n += 1
+                if past_n == 1:
+                    l_s += past_s 
                 else:
-                    ss = str(s_2)+s_1
-                    result += ss
-                s_dict = {}
-                s_dict[s[i:i+l]] = 1
-        if len(s_dict) == 0:
-            print(result, len(result))
-        else:
-            s_1 = list(s_dict.keys())[0]
-            s_2 = list(s_dict.values())[0]
-            if s_2 == 1:
-                result += s_1
-            else:
-                ss = str(s_2)+s_1
-                result += ss
-        
-        answer = min(answer, len(result))
-    return answer
+                    l_s += (str(past_n)+past_s)
+            stack.append(cur_s)
+        if len(stack) == 1:
+            l_s += stack[-1]
+        elif len(stack) >= 2:
+            l_s += (str(len(stack))+stack[-1])
+        min_s = min(min_s, len(l_s))
+    return min_s
