@@ -1,20 +1,19 @@
 def solution(new_id):
     import re
-    # "...!@BaT#*..y.abcdefghijklm"
-    step1 = new_id.lower()
-    step2 = re.sub('[^a-z0-9-_.]', '', step1)
-    while '..' in step2:
-        step2 = step2.replace('..', '.')
-    step3 = step2[:]
-    step4 = step3.strip('.')
-    if step4 == '':
-        step4 += 'a'
-    step5 = step4[:]
-    if len(step5) >= 16:
-        step5 = step5[:15]
-    step6 = step5.rstrip('.')
-    while len(step6) <= 2:
-        step6 += step6[-1]
-    step7 = step6[:]
-    return step7
-        
+    new_id = new_id.lower() #1
+    new_id = re.sub('[^a-z0-9-_.]', '', new_id) #2
+    while '..' in new_id: #3
+        new_id = new_id.replace('..', '.')
+    if new_id and new_id[0] == '.':
+        new_id = new_id[1:]
+    if new_id and new_id[-1] == '.':
+        new_id = new_id[:-1]
+    if len(new_id) == 0:
+        new_id = "a"
+    if len(new_id) >= 16:
+        new_id = new_id[:15]
+        if new_id[-1] == '.':
+            new_id = new_id[:-1]
+    while len(new_id) <= 2:
+        new_id += new_id[-1]
+    return new_id
