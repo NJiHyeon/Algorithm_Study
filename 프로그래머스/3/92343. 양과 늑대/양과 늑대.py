@@ -1,11 +1,8 @@
 def solution(info, edges):
-    visited = [0 for _ in range(len(info))]
-    answer = []
-
     def backtracking(sheep, wolf):
         # 탈출조건
         if sheep > wolf:
-            answer.append(sheep)
+            output.append(sheep)
         else:
             return
 
@@ -18,8 +15,10 @@ def solution(info, edges):
                 else:
                     backtracking(sheep, wolf+1)
                 visited[c] = False
-    
+                
+
+    output = []
+    visited = [False] * len(info)
     visited[0] = True
     backtracking(1, 0)
-
-    return max(answer)
+    return max(output)
