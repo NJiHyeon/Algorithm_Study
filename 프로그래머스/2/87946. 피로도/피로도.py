@@ -1,19 +1,22 @@
 def solution(k, dungeons):
-    answer = 0
-    def backtrack(visited, k):
-        nonlocal answer
+    def backtrack(visited, cur_k, cur_n):
+        nonlocal max_n
         # base case
-        if len(visited) > answer:
-            answer = len(visited)
+        if cur_n > max_n:
+            max_n = cur_n
         # repeat
         for i in range(len(dungeons)):
+            cur_d = dungeons[i]
             if i not in visited:
-                if k >= dungeons[i][0]:
-                    # append
+                if cur_k >= cur_d[0]:
+                    cur_k -= cur_d[1]
+                    cur_n += 1
                     visited.append(i)
-                    # call
-                    backtrack(visited, k-dungeons[i][1])
-                    # pop
+                    backtrack(visited, cur_k, cur_n)
+                    cur_k += cur_d[1]
+                    cur_n -= 1
                     visited.pop()
-        return answer
-    return backtrack([], k)
+                    
+    max_n = 0
+    backtrack([], k, 0)
+    return max_n
