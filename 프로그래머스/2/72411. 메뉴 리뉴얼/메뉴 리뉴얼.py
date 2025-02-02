@@ -1,37 +1,43 @@
 def solution(orders, course):
-    answer = []
-    # 조건 : 배열의 각 원소에 저장된 문자열 또한 알파벳 오름차순으로 정렬
-    for i in range(len(orders)) :
-        dd = sorted(orders[i])
-        ddd = ''.join(sorted(dd))
-        orders[i]=ddd
-
-    from itertools import combinations
-    for c in course :
-        c_dict = dict()
-        for i in range(len(orders)) :
-            if len(orders[i]) >= c :
-                combi = list(combinations(orders[i], c))
-                for com in combi :
-                    name = ''.join(com)
-                    if name in c_dict :
-                        c_dict[name] += 1
-                    else :
-                        c_dict[name] = 1
-        
-        # 제일 많은 순으로 
-        c_list = sorted(c_dict.items(), key=lambda x: x[1], reverse=True)
-        
-        # 조건 : 최소 2명 이상의 손님으로부터 주문된 단품메뉴 조합 (앞에서 정렬했으므로 첫번째 인덱스 확인)
-        if c_list and c_list[0][1] >= 2 :
-            answer.append(c_list[0][0])
-        else :
-            continue
-        # 조건 : 만약 가장 많이 함께 주문된 메뉴 구성이 여러 개라면, 모두 배열에 담아 return 하면 됩니다.
-        k = 1
-        while len(c_list)>=k+1 and c_list[k][1] == c_list[0][1] :
-            answer.append(c_list[k][0])
-            k += 1
-    # 조건 : 정답은 각 코스요리 메뉴의 구성을 문자열 형식으로 배열에 담아 사전 순      
-    answer.sort()      
-    return answer
+    # 단품 메뉴들을 조합해서 코스요리 형태로 재구성하기 
+    # 메뉴 주문시 가장 많이 함께 주문한 단품메뉴들을 선택
+    # 단, 최소 2가지 이상의 단품메뉴로 구성 / 최소 2명 이상의 손님으로부터 주문된 것 단품메뉴 조합에 대해서만 후보에 포함 
+    
+    # 'XA'와 'AX'가 다르게 카운트 되는 것 방지 
+    for i in range(len(orders)):
+        orders[i] = ''.join(sorted(list(orders[i])))
+    
+    def make_combi(orders, n):
+        combi = []
+        def backtrack(order, cur, cur_i, n):
+            # base case
+            if len(cur) == n:
+                combi.append(''.join(cur))
+                return
+            # repeat
+            for i in range(cur_i, len(order)):
+                if order[i] not in cur:
+                    cur.append(order[i])
+                    backtrack(order, cur, i+1, n)
+                    cur.pop()
+            
+        for order in orders:
+            backtrack(order, [], 0, n)
+        return combi
+    
+    result = []
+    for n in course:
+        max_n = 0
+        combi = make_combi(orders, n)
+        dict = {}
+        for f in combi:
+            if f not in dict:
+                dict[f] = 1
+            else:
+                dict[f] += 1
+            max_n = max(max_n, dict[f])
+        for k, v in dict.items():
+            if v >= 2 and v == max_n:
+                result.append(k)
+    result.sort()
+    return result
