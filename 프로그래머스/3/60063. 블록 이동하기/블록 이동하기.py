@@ -1,53 +1,61 @@
-from collections import deque
-# 이동 가능한 경우의 수 확인 함수
-def get_next_pos(pos, new_board):
-    next_pos = set()
-    lx, ly, rx, ry = pos[0][0], pos[0][1], pos[1][0], pos[1][1]
-    #✅ 상하좌우 이동이 가능한 경우를 구한다.
-    for dx, dy in [[0, 1], [0, -1], [1, 0], [-1, 0]]:
-        nlx, nly, nrx, nry = lx+dx, ly+dy, rx+dx, ry+dy
-        if new_board[nlx][nly] == 0 and new_board[nrx][nry] == 0:
-            next_pos.add(((nlx, nly),(nrx, nry)))
-    #✅ 가로 방향일 경우 회전 가능한 경우를 구한다.
-    if lx == rx:
-        for i in [1, -1]:
-            if new_board[lx+i][ly] == 0 and new_board[rx+i][ry] == 0:
-                next_pos.add(((lx, ly), (lx+i, ly)))
-                next_pos.add(((rx, ry), (rx+i, ry)))
-		#✅ 세로 방향일 경우 회전 가능한 경우를 구한다.
-    if ly == ry:
-        for i in [1, -1]:
-            if new_board[lx][ly+i] == 0 and new_board[rx][ry+i] == 0:
-                next_pos.add(((lx, ly), (lx, ly+i)))
-                next_pos.add(((rx, ry), (rx, ry+i)))
-    return next_pos
-
 def solution(board):
-    n = len(board)
-		#✅ 인덱싱의 편의를 위해 원본 배열에 상하좌우로 한 칸씩 늘린 새 배열을 만든다.
-    new_board = [[1 for _ in range(n+2)] for _ in range(n+2)]
-    #✅ 배열의 모서리 부분을 1로 채우고 내부를 원본 배열의 값들로 채운다.
-    for i in range(n):
-        for j in range(n):
-            new_board[i+1][j+1] = board[i][j]
-    #✅ 로봇의 첫 위치를 방문표시하고 큐에 추가한다.
-    robot_pos = ((1, 1), (1, 2))
-    q = deque()
-    q.append((robot_pos, 0))
-    visited = set()
-		# 로봇의 위치는 set 자료형이지만 set은 hash할수 없는 함수이기에 set에 추가 불가. 을 통해 hash가능하도록 변경
-    visited.add((robot_pos))
-    #✅ 큐가 빌때까지 반복한다.
-    while q:
-        cur_pos, cost = q.popleft()
-				#✅ 목적지에 도착한 경우 종료한다.
-	
-        if (n, n) in cur_pos:
-            return cost
-				#✅ 현재 상태에서 이동가능한 상태를 구한다.
-        for next_pos in get_next_pos(cur_pos, new_board):
-        		#✅ 아직 방문하지 않았다면 방문한다.
-            if (next_pos) not in visited:
-                q.append((next_pos, cost+1))
-                visited.add((next_pos))
-    return -1
+    from collections import deque 
+    row_len = col_len = N = len(board)
+    new_board = [[1 for _ in range(len(board))]]
+    for b in board:
+        new_board.append([1] + b)
+
+    dar = [-1, 1, 0, 0]
+    dac = [0, 0, -1, 1]
+    dbr = [-1, 1, 0, 0]
+    dbc = [0, 0, -1, 1]
+
+    def make_visit(ar, ac, br, bc):
+        return tuple(sorted([(ar, ac), (br, bc)]))
+        
+    def bfs(ar, ac, br, bc, n, d):
+        q = deque()
+        q.append([ar, ac, br, bc, n, d])
+        visit = set()
+        visit.add(make_visit(ar, ac, br, bc))
+        d_dict = {'가로':'세로', '세로':'가로'}
+
+        while q:
+            ar, ac, br, bc, n, d = q.popleft()
+            if ((ar, ac) == (N, N)) or ((br, bc) == (N, N)):
+                return n
+            
+            for i in range(4):
+                next_ar = ar + dar[i]
+                next_ac = ac + dac[i]
+                next_br = br + dbr[i]
+                next_bc = bc + dbc[i]
+                next_n = n + 1
+                next_v = make_visit(next_ar, next_ac, next_br, next_bc)
+                if 0 < next_ar <= row_len and 0 < next_ac <= col_len and 0 < next_br <= row_len and 0 < next_bc <= col_len:
+                    if new_board[next_ar][next_ac] == 0 and new_board[next_br][next_bc] == 0:
+                        if next_v not in visit:
+                            q.append([next_ar, next_ac, next_br, next_bc, next_n, d])
+                            visit.add(next_v)
+
+                            if (i==0 and d=='가로') or (i==2 and d=='세로'):
+                                rotation1 = make_visit(next_ar, next_ac, ar, ac)
+                                if rotation1 not in visit:
+                                    q.append([next_ar, next_ac, ar, ac, next_n, d_dict[d]])
+                                    visit.add(rotation1)
+                                rotation2 = make_visit(next_br, next_bc, br, bc)
+                                if rotation2 not in visit:
+                                    q.append([next_br, next_bc, br, bc, next_n, d_dict[d]])
+                                    visit.add(rotation2)
+                            elif (i==1 and d=='가로') or (i==3 and d=='세로'):
+                                rotation1 = make_visit(ar, ac, next_ar, next_ac)
+                                if rotation1 not in visit:
+                                    q.append([ar, ac, next_ar, next_ac, next_n, d_dict[d]])
+                                    visit.add(rotation1)
+                                rotation2 = make_visit(br, bc, next_br, next_bc)
+                                if rotation2 not in visit:
+                                    q.append([br, bc, next_br, next_bc, next_n, d_dict[d]])
+                                    visit.add(rotation2)
+
+    result = bfs(1, 1, 1, 2, 0, '가로')
+    return result
