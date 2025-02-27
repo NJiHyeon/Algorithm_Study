@@ -1,35 +1,28 @@
 def solution(n, s, a, b, fares):
     import heapq 
-    graph = {}
-    for fare in fares:
-        if fare[0] not in graph:
-            graph[fare[0]] = [(fare[1], fare[2])]
-        else:
-            graph[fare[0]].append((fare[1], fare[2]))
-        if fare[1] not in graph:
-            graph[fare[1]] = [(fare[0], fare[2])]
-        else:
-            graph[fare[1]].append((fare[0], fare[2]))
+    graph = {i : [] for i in range(1, n+1)}
+    for a_node, b_node, fare in fares:
+        graph[a_node].append((b_node, fare))
+        graph[b_node].append((a_node, fare))
 
-    taxi = []
-    for start_v in [s, a, b]:
-        distances = [float("inf")]*(n+1)
-        distances[start_v] = 0
-        pq = [(start_v, 0)]
+    def dijkstra(graph, a, b, s, x, n):
+        distances = [float("inf")] * (n+1)
+        distances[x] = 0
+        pq = [(0, x)]
         while pq:
-            cur_v, cur_cost = heapq.heappop(pq)
+            cur_cost, cur_v = heapq.heappop(pq)
             if distances[cur_v] < cur_cost:
-                continue
+                continue 
             for next_v, cost in graph[cur_v]:
                 next_cost = distances[cur_v] + cost 
                 if next_cost < distances[next_v]:
                     distances[next_v] = next_cost
-                    heapq.heappush(pq, (next_v, next_cost))
-        taxi.append(distances[1:])
-    
-    result = float("inf")
-    for i in range(n):
-        if result > (taxi[0][i] + taxi[1][i] + taxi[2][i]):
-            result = taxi[0][i] + taxi[1][i] + taxi[2][i]
-    return result
+                    heapq.heappush(pq, (next_cost, next_v))
+        return distances[a]+distances[b]+distances[s]
 
+    result = []
+    for x in range(1, n+1):
+        total_sum = dijkstra(graph, a, b, s, x, n)
+        result.append(total_sum)
+        
+    return min(result)
