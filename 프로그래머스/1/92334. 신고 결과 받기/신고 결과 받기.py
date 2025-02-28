@@ -1,21 +1,21 @@
 def solution(id_list, report, k):
-    result = []
-    talking = {id:[] for id in id_list}
-    talked = {id:0 for id in id_list}
-    for tmp in report:
-        ing, ed = tmp.split(" ")[0], tmp.split(" ")[1]
-        if ed in talking[ing]:
-            pass
+    # 신고 결과 정리
+    report_dict = {}
+    for i in range(len(report)):
+        ed, pp = report[i].split()
+        if pp in report_dict:
+            report_dict[pp].add(ed)
         else:
-            talking[ing].append(ed)
-            talked[ed] += 1
-    
-    for id in id_list:
-        n = 0
-        for ed in talking[id]:
-            if talked[ed] >= k:
-                n += 1
-        result.append(n)
+            report_dict[pp] = {ed}
+    # 메일 발송 정리
+    mail_dict = {people:0 for people in id_list}
+    for pp in report_dict:
+        if len(report_dict[pp]) >= k:
+            for ed in report_dict[pp]:
+                mail_dict[ed] += 1
+    # 결과출력
+    result = []
+    for m in mail_dict:
+        result.append(mail_dict[m])
     return result
-            
-        
+    
